@@ -1,0 +1,10 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <codeStyleSettings language="ObjectiveC">
+      <option name="BLANK_LINES_AROUND_METHOD_IN_INTERFACE" value="0" />
+      <indentOptions>
+        <option name="CONTINUATION_INDENT_SIZE" value="0" />
+      </indentOptions>
+    </codeStyleSettings>
+  </code_scheme>
+</component>
