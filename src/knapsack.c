@@ -85,15 +85,6 @@ bool **elite_put(bool **elite, bool *x) {
     return elite;
 }
 
-// Prints the solution x array, its function f(x) and how much capacity has been used in the knapsack
-void print_solution(bool *x) {
-    for (int i = 0; i < n; ++i) {
-        printf("x[%d] = %d\n", i, x[i]);
-    }
-    printf("\nf(x) = %lld\n", f(x));
-    printf("weight / capacity = %d / %d (%.2f%%)\n", w(x), w_max, w(x) * 100.0 / w_max);
-}
-
 // Compare function to be used with qsort
 int profit_cmp(const void *o1, const void *o2) {
     double p1 = ((object_t *) o1)->profit;
@@ -227,10 +218,11 @@ void knapsack_local_search(bool *x) {
 }
 
 /*
- * Creates a greedy randomized solution x applies a local search on it i_max times
- * and prints the best solution
+ * Creates a greedy randomized solution x applies a local search on it i_max times;
+ *
+ * Returns the function of the best solution
  */
-void knapsack_grasp(int i_max) {
+long long knapsack_grasp(int i_max) {
     long long f_star = LLONG_MIN;
 
     bool *x_star = malloc(n * sizeof(bool));
@@ -246,12 +238,11 @@ void knapsack_grasp(int i_max) {
         }
     }
 
-    print_solution(x_star);
-
     // Free allocated resources
-    free(objects);
     free(x_star);
     free(x);
+
+    return f_star;
 }
 
 // Finds the neighbor in the path between x and xt and saves it in x
@@ -308,9 +299,9 @@ void knapsack_path_relinking(bool *x, bool *xt) {
  * After the first iteration a path-relinking algorithm is applied between the constructed
  * solution and each of the solutions in the elite set as an intensification strategy;
  *
- * The best solution is printed
+ * Returns the function of the best solution
  */
-void knapsack_grasp_path_relinking(int i_max) {
+long long knapsack_grasp_path_relinking(int i_max) {
     bool *x_star = malloc(n * sizeof(bool));
     bool *x = malloc(n * sizeof(bool));
     bool **elite = NULL;
@@ -336,14 +327,13 @@ void knapsack_grasp_path_relinking(int i_max) {
         elite = elite_put(elite, x_star);
     }
 
-    print_solution(x_star);
-
     // Free allocated resources
     for (int i = 0; i < arrlen(elite); ++i) {
         free(elite[i]);
     }
     arrfree(elite);
-    free(objects);
     free(x_star);
     free(x);
+
+    return f_star;
 }
