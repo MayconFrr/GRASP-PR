@@ -316,12 +316,12 @@ long long knapsack_grasp_path_relinking(int i_max) {
         if (i > 0) {
             for (int j = 0; j < arrlen(elite); ++j) {
                 knapsack_path_relinking(x, elite[j]);
-
-                if (f(x) > f_star) {
-                    f_star = f(x);
-                    x_star = memcpy(x_star, x, n * sizeof(bool));
-                }
             }
+        }
+
+        if (f(x) > f_star) {
+            f_star = f(x);
+            x_star = memcpy(x_star, x, n * sizeof(bool));
         }
 
         elite = elite_put(elite, x_star);
