@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
         time_sum += (double) (end - start) / CLOCKS_PER_SEC;
     }
 
-    printf("\nAverage f(x): %f\n"
+    printf("Average f(x): %f\n"
            "Average execution time: %lfs\n", (double) f_sum / 5.0, time_sum / 5.0);
 
     return 0;
