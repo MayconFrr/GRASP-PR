@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     long long f_sum = 0;
 
     if (argc < 3) {
-        puts("Uso: ./main FILE [GRASP | GRASP-PR]");
+        puts("Usage: ./main FILE [GRASP | GRASP-PR]");
         exit(EXIT_FAILURE);
     }
 
